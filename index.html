@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Soares Mudanças | Mudanças Residenciais e Comerciais</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f7fa;
+    color:#333;
+    line-height:1.6;
+}
+
+header{
+    background:#003366;
+    color:white;
+    padding:20px 10%;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav h1{
+    font-size:32px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.hero{
+
+    background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1400&q=80');
+
+    background-size:cover;
+    background-position:center;
+    height:520px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    color:white;
+}
+
+.hero h2{
+    font-size:52px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:22px;
+    margin-bottom:30px;
+}
+
+.botao{
+
+    display:inline-block;
+
+    background:#ff9800;
+    color:white;
+
+    padding:18px 35px;
+
+    border-radius:6px;
+
+    text-decoration:none;
+
+    font-size:20px;
+
+    font-weight:bold;
+}
+
+.botao:hover{
+    background:#ff6f00;
+}
+
+section{
+
+    padding:70px 10%;
+
+}
+
+h3{
+
+    text-align:center;
+
+    font-size:36px;
+
+    color:#003366;
+
+    margin-bottom:50px;
+
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:10px;
+
+    padding:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+.card h4{
+
+    color:#003366;
+
+    margin-bottom:15px;
+
+}
+
+.diferenciais{
+
+    background:#003366;
+
+    color:white;
+
+}
+
+.diferenciais h3{
+
+    color:white;
+
+}
+
+.lista{
+
+    max-width:900px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+
+    gap:20px;
+
+}
+
+.lista div{
+
+    background:rgba(255,255,255,.08);
+
+    padding:20px;
+
+    border-radius:8px;
+
+}
+
+.etapas{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+}
+
+.etapa{
+
+background:white;
+
+padding:30px;
+
+border-radius:10px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+text-align:center;
+
+}
+
+.numero{
+
+font-size:40px;
+
+color:#ff9800;
+
+font-weight:bold;
+
+margin-bottom:15px;
+
+}
+
+.depoimentos{
+
+background:#eef3f7;
+
+}
+
+blockquote{
+
+background:white;
+
+padding:30px;
+
+border-left:6px solid #ff9800;
+
+margin-bottom:25px;
+
+border-radius:5px;
+
+}
+
+.cta{
+
+background:#ff9800;
+
+text-align:center;
+
+color:white;
+
+}
+
+.cta h2{
+
+font-size:42px;
+
+margin-bottom:20px;
+
+}
+
+footer{
+
+background:#222;
+
+color:white;
+
+text-align:center;
+
+padding:30px;
+
+}
+
+@media(max-width:768px){
+
+.hero h2{
+
+font-size:36px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+nav{
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+nav ul{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<h1>🚚 Soares Mudanças</h1>
+
+<ul>
+
+<li><a href="#sobre">Sobre</a></li>
+
+<li><a href="#servicos">Serviços</a></li>
+
+<li><a href="#diferenciais">Diferenciais</a></li>
+
+<li><a href="#contato">Contato</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div>
+
+<h2>Sua mudança com segurança, rapidez e confiança.</h2>
+
+<p>Atendemos mudanças residenciais, comerciais e interestaduais com equipe especializada.</p>
+
+<a class="botao" href="#contato">Solicite um Orçamento</a>
+
+</div>
+
+</section>
+
+<section id="sobre">
+
+<h3>Sobre a Soares Mudanças</h3>
+
+<p style="max-width:900px;margin:auto;text-align:center;font-size:20px;">
+
+A Soares Mudanças atua oferecendo soluções completas para transporte de móveis,
+equipamentos e mudanças residenciais e comerciais. Nossa missão é proporcionar
+tranquilidade aos clientes, garantindo segurança, pontualidade e atendimento
+personalizado em cada serviço realizado.
+
+</p>
+
+</section>
+
+<section id="servicos">
+
+<h3>Nossos Serviços</h3>
+
+<div class="cards">
+
+<div class="card">
+
+<h4>🏠 Mudanças Residenciais</h4>
+
+<p>Transporte seguro de móveis e objetos pessoais com total cuidado.</p>
+
+</div>
+
+<div class="card">
+
+<h4>🏢 Mudanças Comerciais</h4>
+
+<p>Planejamento para minimizar o impacto das atividades da sua empresa.</p>
+
+</div>
+
+<div class="card">
+
+<h4>📦 Embalagem</h4>
+
+<p>Materiais de proteção para garantir a integridade dos seus bens.</p>
+
+</div>
+
+<div class="card">
+
+<h4>🚛 Transporte Interestadual</h4>
+
+<p>Atendimento para diversas cidades com segurança e rastreabilidade.</p>
+
+</div>
+
+<div class="card">
+
+<h4>📦 Guarda Móveis</h4>
+
+<p>Espaço seguro para armazenagem temporária dos seus bens.</p>
+
+</div>
+
+<div class="card">
+
+<h4>📋 Orçamento Gratuito</h4>
+
+<p>Solicite uma avaliação sem compromisso.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="diferenciais" class="diferenciais">
+
+<h3>Por que escolher a Soares Mudanças?</h3>
+
+<div class="lista">
+
+<div>✔ Equipe treinada e experiente</div>
+
+<div>✔ Atendimento personalizado</div>
+
+<div>✔ Veículos próprios</div>
+
+<div>✔ Pontualidade</div>
+
+<div>✔ Segurança no transporte</div>
+
+<div>✔ Excelente custo-benefício</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h3>Como funciona</h3>
+
+<div class="etapas">
+
+<div class="etapa">
+
+<div class="numero">1</div>
+
+<h4>Solicite um orçamento</h4>
+
+<p>Entre em contato e informe sua necessidade.</p>
+
+</div>
+
+<div class="etapa">
+
+<div class="numero">2</div>
+
+<h4>Planejamento</h4>
+
+<p>Organizamos toda a logística da mudança.</p>
+
+</div>
+
+<div class="etapa">
+
+<div class="numero">3</div>
+
+<h4>Execução</h4>
+
+<p>Realizamos o transporte com segurança e pontualidade.</p>
+
+</div>
+
+<div class="etapa">
+
+<div class="numero">4</div>
+
+<h4>Entrega</h4>
+
+<p>Seus bens chegam ao destino com tranquilidade.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="depoimentos">
+
+<h3>O que nossos clientes dizem</h3>
+
+<blockquote>
+
+"Equipe extremamente cuidadosa e pontual. Recomendo!"
+
+</blockquote>
+
+<blockquote>
+
+"Minha mudança ocorreu sem nenhum problema. Excelente atendimento."
+
+</blockquote>
+
+<blockquote>
+
+"Preço justo e profissionais muito educados."
+
+</blockquote>
+
+</section>
+
+<section id="contato" class="cta">
+
+<h2>Peça seu orçamento agora!</h2>
+
+<p style="font-size:22px;margin-bottom:30px;">
+
+Atendimento rápido pelo WhatsApp.
+
+</p>
+
+<a class="botao" href="https://wa.me/5500000000000">
+
+Falar no WhatsApp
+
+</a>
+
+</section>
+
+<footer>
+
+<h3 style="color:white;margin-bottom:20px;">Soares Mudanças</h3>
+
+<p>📍 Sua cidade - Seu Estado</p>
+
+<p>📞 (00) 00000-0000</p>
+
+<p>✉ contato@soaresmudancas.com.br</p>
+
+<br>
+
+<p>© 2026 Soares Mudanças - Todos os direitos reservados.</p>
+
+</footer>
+
+</body>
+</html>
