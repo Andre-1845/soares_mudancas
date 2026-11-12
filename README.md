@@ -45,11 +45,12 @@ php artisan test                    # 8 testes
 2. **Avançado → Acesso SSH**: ative. **Avançado → Configuração do PHP**: PHP 8.3.
 3. **Bancos de dados → MySQL**: crie banco + usuário (anote os dados).
 4. **E-mails**: crie `contato@soaresmudancas.com` (veja seção abaixo).
-5. Pelo SSH:
+5. Pelo SSH (mesmo esquema do projeto dízimo: repositório inteiro no `public_html`, o `.htaccess` da raiz manda tudo para `public/`):
    ```bash
    cd ~/domains/soaresmudancas.com
-   git clone git@github.com:Andre-1845/soares_mudancas.git app     # repo privado: cadastre a chave SSH do servidor como Deploy key no GitHub
-   cd app
+   mv public_html public_html_old
+   git clone https://github.com/Andre-1845/soares_mudancas.git public_html
+   cd public_html
    composer install --no-dev --optimize-autoloader
    cp .env.hostinger.example .env && nano .env                       # preencha banco e senha do e-mail
    php artisan key:generate
@@ -57,15 +58,13 @@ php artisan test                    # 8 testes
    php artisan storage:link
    php artisan make:filament-user
    php artisan optimize && php artisan filament:optimize
-   # aponta a pasta pública do domínio para o Laravel
-   cd .. && mv public_html public_html_old && ln -s ~/domains/soaresmudancas.com/app/public public_html
    ```
 6. **Segurança → SSL**: instale o SSL grátis e ative "forçar HTTPS".
 7. Acesse `https://soaresmudancas.com/admin` e preencha endereço, fotos, CNPJ etc.
 
 ### Atualizar depois
 ```bash
-cd ~/domains/soaresmudancas.com/app
+cd ~/domains/soaresmudancas.com/public_html
 git pull && composer install --no-dev --optimize-autoloader
 php artisan migrate --force && php artisan optimize:clear && php artisan optimize && php artisan filament:optimize
 ```

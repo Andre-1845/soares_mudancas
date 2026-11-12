@@ -1,0 +1,16 @@
+# Deploy no estilo do projeto dizimo: o repositorio inteiro fica no public_html
+# e todas as requisicoes sao enviadas para a pasta public/ do Laravel.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloqueia acesso direto a arquivos sensiveis (.env, .git, composer, artisan...)
+    RewriteRule ^(\.env|\.git|composer\.(json|lock)|artisan|package\.json|phpunit\.xml|README\.md) - [F,L,NC]
+    RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteRule (^|/)\. - [F,L]
+
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+Options -Indexes
