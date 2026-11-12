@@ -1,0 +1,104 @@
+/*
+ * Tema do painel no estilo do projeto "dízimo":
+ * navbar azul-escura, sidebar azul-noite, fundo cinza-claro, títulos azuis,
+ * tabelas com cabeçalho cinza e cartões brancos com sombra.
+ * CSS puro (sem build): carregado depois do CSS do Filament, então sobrescreve.
+ */
+:root {
+  --sm-navbar: #1e3a8a;      /* blue-900 */
+  --sm-sidebar: #0f172a;     /* slate-900 */
+  --sm-sidebar-hover: #1e3a8a;
+  --sm-bg: #f3f4f6;          /* gray-100 */
+  --sm-title: #1e3a8a;
+  --sm-border: #d1d5db;
+}
+
+/* Fundo geral */
+.fi-body { background: var(--sm-bg); }
+
+/* ===== Navbar (topo) ===== */
+.fi-topbar-ctn, .fi-topbar { background: var(--sm-navbar) !important; border-bottom: 0; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+.fi-topbar, .fi-topbar .fi-logo, .fi-topbar .fi-icon-btn, .fi-topbar .fi-icon { color: #f9fafb; }
+.fi-topbar .fi-icon-btn:hover { background: rgba(255,255,255,.12); }
+.fi-topbar .fi-global-search-field .fi-input-wrp { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); box-shadow: none; }
+.fi-topbar .fi-global-search-field input { color: #fff; }
+.fi-topbar .fi-global-search-field input::placeholder { color: rgba(255,255,255,.65); }
+.fi-topbar .fi-global-search-field .fi-icon { color: rgba(255,255,255,.7); }
+.fi-topbar .fi-user-avatar { outline: 2px solid rgba(255,255,255,.6); }
+
+/* ===== Sidebar ===== */
+.fi-sidebar, .fi-sidebar-header, .fi-sidebar-nav { background: var(--sm-sidebar) !important; }
+.fi-sidebar { border-right: 0; box-shadow: none; }
+.fi-sidebar-header { border-bottom: 2px solid var(--sm-sidebar-hover); box-shadow: none; }
+.fi-sidebar-header .fi-logo { color: #60a5fa; }
+.fi-sidebar-header .fi-icon-btn, .fi-sidebar-header .fi-icon { color: #e5e7eb; }
+
+.fi-sidebar-group-label {
+  color: #ffffff; text-transform: uppercase; font-size: .72rem; letter-spacing: .06em; opacity: .75;
+}
+.fi-sidebar-group-btn .fi-icon, .fi-sidebar-group-collapse-btn .fi-icon { color: #94a3b8; }
+
+.fi-sidebar-item-btn { color: #f9fafb; border: 1px solid transparent; border-radius: .375rem; }
+.fi-sidebar-item-btn:hover, .fi-sidebar-item-btn:focus-visible { background: var(--sm-sidebar-hover) !important; }
+.fi-sidebar-item-label { color: #f9fafb !important; font-weight: 500; }
+.fi-sidebar-item-icon { color: #cbd5e1 !important; }
+.fi-sidebar-item-grouped-border-part, .fi-sidebar-item-grouped-border-part-not-first, .fi-sidebar-item-grouped-border-part-not-last { background: #334155 !important; }
+
+/* Item ativo: borda branca, como no dízimo */
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+  background: transparent !important; border-color: #ffffff;
+}
+.fi-sidebar-item.fi-active .fi-sidebar-item-label { color: #ffffff !important; font-weight: 700; }
+.fi-sidebar-item.fi-active .fi-sidebar-item-icon { color: #60a5fa !important; }
+.fi-sidebar-item .fi-badge { box-shadow: none; }
+
+/* ===== Conteúdo ===== */
+.fi-header-heading { color: var(--sm-title); font-weight: 700; }
+.fi-header-subheading { color: #6b7280; }
+.fi-breadcrumbs-item-label { color: #3b82f6; }
+
+.fi-section:not(.fi-section-not-contained), .fi-ta-ctn, .fi-wi-stats-overview-stat, .fi-wi-chart .fi-section, .fi-fo-repeater-item {
+  border-radius: .5rem; box-shadow: 0 4px 12px rgba(15, 23, 42, .08);
+}
+.fi-section-header-heading, .fi-ta-header-heading { color: var(--sm-title); }
+
+/* Tabelas: cabeçalho cinza com bordas, linhas com hover (como .table do dízimo) */
+.fi-ta-table thead tr { background: #e5e7eb; }
+.fi-ta-header-cell { color: #111827; font-weight: 600; border-bottom: 1px solid #9ca3af; }
+.fi-ta-row:hover { background: #f3f4f6; }
+.fi-ta-row td { border-bottom: 1px solid #e5e7eb; }
+
+/* Cards de indicadores do painel */
+.fi-wi-stats-overview-stat { border-top: 4px solid #3b82f6; }
+.fi-wi-stats-overview-stat-label { color: #4b5563; font-weight: 600; }
+.fi-wi-stats-overview-stat-value { color: var(--sm-title); }
+
+/* Botões principais azuis (btn-primary do dízimo) */
+.fi-btn { border-radius: .375rem; }
+
+/* ===== Página "Conteúdo do site" (cards) ===== */
+.sm-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1.25rem; }
+.sm-card {
+  position: relative; display: flex; gap: 1rem; align-items: flex-start; padding: 1.4rem 1.4rem 1.4rem 1.25rem;
+  background: #fff; border-radius: .6rem; box-shadow: 0 4px 12px rgba(15,23,42,.08);
+  border-left: 5px solid var(--tone, #3b82f6); text-decoration: none; color: inherit;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.sm-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(15,23,42,.14); }
+.sm-card--blue { --tone: #3b82f6; } .sm-card--green { --tone: #22c55e; } .sm-card--orange { --tone: #f97316; }
+.sm-card--purple { --tone: #9333ea; } .sm-card--gray { --tone: #6b7280; }
+.sm-card__icon { flex: none; width: 46px; height: 46px; border-radius: .6rem; display: grid; place-items: center; background: color-mix(in srgb, var(--tone) 14%, white); color: var(--tone); }
+.sm-card__svg { width: 24px; height: 24px; }
+.sm-card__body { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+.sm-card__title { font-size: 1.05rem; font-weight: 700; color: var(--sm-title); }
+.sm-card__text { font-size: .9rem; color: #6b7280; line-height: 1.45; }
+.sm-card__meta { margin-top: .4rem; align-self: flex-start; font-size: .75rem; font-weight: 700; color: var(--tone); background: color-mix(in srgb, var(--tone) 12%, white); padding: .15rem .55rem; border-radius: 999px; }
+.sm-card__arrow { margin-left: auto; color: #9ca3af; font-size: 1.2rem; transition: transform .15s; }
+.sm-card:hover .sm-card__arrow { transform: translateX(3px); color: var(--tone); }
+.sm-tip { margin-top: 1.5rem; padding: .9rem 1.1rem; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: .5rem; color: #1e3a8a; font-size: .9rem; }
+.sm-tip a { font-weight: 700; text-decoration: underline; }
+
+/* ===== Login (fundo em degradê, como o dízimo) ===== */
+.fi-simple-layout { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%); }
+.fi-simple-main { box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+.fi-simple-header-heading { color: var(--sm-title); }
