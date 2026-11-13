@@ -7,12 +7,13 @@
     $phoneDigits = preg_replace('/\D/', '', (string) $s['phone']);
     $lat = $s['latitude']; $lng = $s['longitude'];
     $hasCoords = filled($lat) && filled($lng);
-    $placeQuery = $hasCoords ? "$lat,$lng" : trim($name.' '.$s['address']);
+    $fullAddress = \App\Support\SeoSchema::fullAddress($s);
+    $placeQuery = $hasCoords ? "$lat,$lng" : trim($name.' '.$fullAddress);
     $wazeLink = $hasCoords
         ? "https://waze.com/ul?ll={$lat},{$lng}&navigate=yes"
-        : 'https://waze.com/ul?q='.rawurlencode((string) $s['address']).'&navigate=yes';
+        : 'https://waze.com/ul?q='.rawurlencode($fullAddress).'&navigate=yes';
     $mapsLink = 'https://www.google.com/maps/search/?api=1&query='.rawurlencode($placeQuery);
-    $mapEmbed = 'https://www.google.com/maps?q='.rawurlencode($hasCoords ? "$lat,$lng" : (string) $s['address']).'&z='.($hasCoords ? 16 : 12).'&output=embed';
+    $mapEmbed = 'https://www.google.com/maps?q='.rawurlencode($hasCoords ? "$lat,$lng" : $fullAddress).'&z='.($hasCoords ? 16 : 12).'&output=embed';
     $heroFirst = optional($visibleSections->firstWhere('key', 'hero'))->images?->first();
     $ogImg = $img($s['og_image']) ?? $heroFirst?->url();
     $quick = collect($s['whatsapp_quick_replies'] ?? [])->pluck('text')->filter();
@@ -52,22 +53,7 @@
     <style>:root{--primary: {{ $s['primary_color'] }}; --accent: {{ $s['accent_color'] }};}</style>
 
     <script type="application/ld+json">
-    {!! json_encode(array_filter([
-        '@context' => 'https://schema.org',
-        '@type' => 'MovingCompany',
-        'name' => $name,
-        'url' => url('/'),
-        'telephone' => $phoneDigits ? '+55'.ltrim(substr($phoneDigits, -11), '0') : null,
-        'email' => $s['email'],
-        'image' => $ogImg,
-        'logo' => $img($s['logo']),
-        'description' => $s['seo_description'],
-        'areaServed' => $s['service_area'],
-        'address' => ['@type' => 'PostalAddress', 'streetAddress' => $s['address'], 'addressRegion' => 'RJ', 'addressCountry' => 'BR'],
-        'geo' => $hasCoords ? ['@type' => 'GeoCoordinates', 'latitude' => (float) $lat, 'longitude' => (float) $lng] : null,
-        'openingHours' => $s['business_hours'],
-        'sameAs' => array_values(array_filter([$s['instagram'], $s['facebook']])) ?: null,
-    ]), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}
+    {!! json_encode(\App\Support\SeoSchema::movingCompany($s, $ogImg, $img($s['logo'])), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}
     </script>
 
     @if($s['google_analytics_id'])
@@ -134,7 +120,7 @@
         <div>
             <p><a href="{{ $waLink }}" class="js-wa-open" data-track="whatsapp_click" data-source="rodape" target="_blank" rel="noopener">WhatsApp {{ $s['phone'] }}</a></p>
             @if($s['email'])<p>@if($quoteActive)<a href="#orcamento">{{ $s['email'] }}</a>@else{{ $s['email'] }}@endif</p>@endif
-            <p>{{ $s['address'] }}</p>
+            <p>{{ $fullAddress }}</p>
         </div>
         @if($s['instagram'] || $s['facebook'])
         <div class="footer__social">

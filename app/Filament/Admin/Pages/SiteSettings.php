@@ -73,8 +73,11 @@ class SiteSettings extends Page
                             ->helperText('Para onde o site envia cada formulário preenchido.'),
                     ]),
                     Section::make('Endereço, Waze e mapa')->columns(2)->schema([
-                        TextInput::make('address')->label('Endereço')->required()->maxLength(200)->columnSpanFull()
-                            ->helperText('Rua, número, bairro, cidade - UF. É usado no mapa e no Waze.'),
+                        TextInput::make('address')->label('Rua, número e bairro')->required()->maxLength(200)->columnSpanFull()
+                            ->placeholder('Av. Dr. Jéfferson G. Bruno, 305 - Paraíso')
+                            ->helperText('Sem cidade e CEP aqui — eles têm campos próprios abaixo (o Google lê cada um separado).'),
+                        TextInput::make('address_city')->label('Cidade')->maxLength(80),
+                        TextInput::make('postal_code')->label('CEP')->mask('99999-999'),
                         TextInput::make('latitude')->label('Latitude (opcional)')->numeric()
                             ->helperText('Mais precisão no Waze: no Google Maps, clique com o botão direito no local e copie os números.'),
                         TextInput::make('longitude')->label('Longitude (opcional)')->numeric(),

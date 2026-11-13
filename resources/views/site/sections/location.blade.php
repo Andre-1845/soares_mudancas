@@ -4,7 +4,7 @@
             @if($section->eyebrow)<p class="eyebrow eyebrow--dark">{{ $section->eyebrow }}</p>@endif
             <h2>{{ $section->title }}</h2>
             @if($section->subtitle)<p>{{ $section->subtitle }}</p>@endif
-            <p class="location__addr">📍 {{ $s['address'] }}</p>
+            <p class="location__addr">📍 {{ $fullAddress }}</p>
             @if($s['business_hours'])<p>🕒 {{ $s['business_hours'] }}</p>@endif
             <p>Atendemos {{ $s['service_area'] }}.</p>
             <div class="location__btns">

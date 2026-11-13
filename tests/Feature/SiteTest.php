@@ -45,6 +45,23 @@ class SiteTest extends TestCase
             ->assertDontSee('O que nossos clientes dizem'); // depoimentos de exemplo estão desativados
     }
 
+    public function test_structured_data_is_valid_json_ld(): void
+    {
+        Setting::setMany(['address' => '  Av. Brasil,  100 - Centro ', 'address_city' => 'Resende', 'postal_code' => '27500-000']);
+        $html = $this->get('/')->assertOk()->getContent();
+
+        preg_match('#<script type="application/ld\+json">(.*?)</script>#s', $html, $m);
+        $data = json_decode($m[1] ?? '', true);
+
+        $this->assertIsArray($data, 'JSON-LD inválido');
+        $this->assertSame('https://schema.org', $data['@context']);
+        $this->assertSame('MovingCompany', $data['@type']);
+        $this->assertSame('Av. Brasil, 100 - Centro', $data['address']['streetAddress']);
+        $this->assertSame('Resende', $data['address']['addressLocality']);
+        $this->assertSame('27500-000', $data['address']['postalCode']);
+        $this->assertStringContainsString('Av. Brasil, 100 - Centro, Resende - RJ, CEP 27500-000', $html);
+    }
+
     public function test_lead_is_saved_and_email_sent(): void
     {
         Mail::fake();

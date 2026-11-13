@@ -3,6 +3,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Endereço único para o Google: www.soaresmudancas.com -> soaresmudancas.com (301)
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
     # Bloqueia acesso direto a arquivos sensiveis (.env, .git, composer, artisan...)
     RewriteRule ^(\.env|\.git|composer\.(json|lock)|artisan|package\.json|phpunit\.xml|README\.md) - [F,L,NC]
     RewriteCond %{REQUEST_URI} !^/\.well-known/
