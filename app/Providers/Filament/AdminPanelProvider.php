@@ -35,6 +35,9 @@ class AdminPanelProvider extends PanelProvider
             ->passwordReset()
             ->profile(isSimple: false)
             ->brandName('Soares Mudanças')
+            ->brandLogo(fn () => view('filament.brand-logo'))
+            ->brandLogoHeight('2.4rem')
+            ->favicon(asset('images/brand/soares-simbolo-512.png'))
             ->colors([
                 'primary' => Color::Blue,
                 'warning' => Color::Orange,

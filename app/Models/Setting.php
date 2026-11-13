@@ -33,6 +33,9 @@ class Setting extends Model
                 return $defaults;
             }
 
+            // Campo salvo vazio no painel = usa o valor padrão de config/site.php
+            $stored = array_filter($stored, fn ($v) => $v !== null && $v !== '' && $v !== []);
+
             return array_replace($defaults, $stored);
         });
     }

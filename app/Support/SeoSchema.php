@@ -42,9 +42,10 @@ class SeoSchema
             'url' => url('/'),
             'telephone' => $phone ? '+55'.substr($phone, -11) : null,
             'email' => $s['email'] ?: null,
-            'image' => $image,
+            'image' => $image ?: $logo,
             'logo' => $logo,
             'description' => $s['seo_description'],
+            'priceRange' => $clean($s['price_range'] ?? null),
             'areaServed' => $clean($s['service_area']),
             'address' => array_filter([
                 '@type' => 'PostalAddress',

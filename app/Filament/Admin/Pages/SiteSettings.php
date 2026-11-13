@@ -45,7 +45,14 @@ class SiteSettings extends Page
 
     public function mount(): void
     {
-        $this->form->fill(Setting::allValues());
+        $values = Setting::allValues();
+        // Imagens padrão da marca (public/images) não ficam no disco de uploads: mostra o campo vazio.
+        foreach (['logo', 'favicon', 'og_image'] as $key) {
+            if (is_string($values[$key] ?? null) && str_starts_with($values[$key], 'images/')) {
+                $values[$key] = null;
+            }
+        }
+        $this->form->fill($values);
     }
 
     public function form(Schema $schema): Schema
@@ -101,8 +108,8 @@ class SiteSettings extends Page
                             ColorPicker::make('primary_color')->label('Cor principal')->required(),
                             ColorPicker::make('accent_color')->label('Cor de destaque (botões)')->required(),
                         ]),
-                        $upload('logo', 'Logotipo')->helperText('PNG com fundo transparente, de preferência.'),
-                        $upload('favicon', 'Ícone da aba do navegador')->helperText('Imagem quadrada, 512×512.'),
+                        $upload('logo', 'Logotipo')->helperText('Vazio = usa o logo padrão da Soares. Para trocar: PNG com fundo transparente.'),
+                        $upload('favicon', 'Ícone da aba do navegador')->helperText('Vazio = usa o símbolo padrão. Para trocar: imagem quadrada 512×512.'),
                     ]),
                 ]),
 
@@ -112,7 +119,10 @@ class SiteSettings extends Page
                     Textarea::make('seo_description')->label('Descrição no Google')->rows(3)->maxLength(170)
                         ->helperText('Até ~155 caracteres.'),
                     $upload('og_image', 'Imagem ao compartilhar o link (WhatsApp, Facebook)')
-                        ->helperText('1200×630. Se vazio, usa a primeira foto do topo.'),
+                        ->helperText('Vazio = usa a imagem padrão da Soares (1200×630).'),
+                    TextInput::make('price_range')->label('Faixa de preço (opcional)')->maxLength(60)
+                        ->placeholder('$$  ou  R$ 300 - R$ 5.000')
+                        ->helperText('Informação para o Google. Use "$", "$$" ou "$$$", ou uma faixa aproximada em reais.'),
                     TextInput::make('google_analytics_id')->label('ID do Google Analytics (opcional)')->placeholder('G-XXXXXXXXXX'),
                 ]),
             ]),

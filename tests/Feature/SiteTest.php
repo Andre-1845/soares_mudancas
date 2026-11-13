@@ -47,7 +47,7 @@ class SiteTest extends TestCase
 
     public function test_structured_data_is_valid_json_ld(): void
     {
-        Setting::setMany(['address' => '  Av. Brasil,  100 - Centro ', 'address_city' => 'Resende', 'postal_code' => '27500-000']);
+        Setting::setMany(['address' => '  Av. Brasil,  100 - Centro ', 'address_city' => 'Resende', 'postal_code' => '27500-000', 'price_range' => '$$', 'logo' => 'site/logo.png']);
         $html = $this->get('/')->assertOk()->getContent();
 
         preg_match('#<script type="application/ld\+json">(.*?)</script>#s', $html, $m);
@@ -59,7 +59,22 @@ class SiteTest extends TestCase
         $this->assertSame('Av. Brasil, 100 - Centro', $data['address']['streetAddress']);
         $this->assertSame('Resende', $data['address']['addressLocality']);
         $this->assertSame('27500-000', $data['address']['postalCode']);
+        $this->assertSame('$$', $data['priceRange']);
+        $this->assertStringContainsString('storage/site/logo.png', $data['logo']);
+        $this->assertStringContainsString('images/brand/soares-compartilhamento-1200x630.png', $data['image']);
         $this->assertStringContainsString('Av. Brasil, 100 - Centro, Resende - RJ, CEP 27500-000', $html);
+    }
+
+    public function test_brand_defaults_apply_when_panel_field_is_empty(): void
+    {
+        Setting::setMany(['logo' => null, 'og_image' => '']); // como fica após salvar o painel sem enviar imagem
+        $this->get('/')->assertOk()
+            ->assertSee('images/brand/soares-logo-horizontal.png', false)
+            ->assertSee('images/brand/soares-simbolo-512.png', false)
+            ->assertSee('og:image" content="'.asset('images/brand/soares-compartilhamento-1200x630.png'), false);
+
+        Setting::setMany(['logo' => 'site/novo-logo.png']);
+        $this->get('/')->assertSee('storage/site/novo-logo.png', false);
     }
 
     public function test_lead_is_saved_and_email_sent(): void

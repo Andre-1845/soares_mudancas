@@ -1,6 +1,7 @@
 @php
     use App\Models\Lead;
-    $img = fn ($p) => $p ? asset('storage/'.ltrim($p, '/')) : null;
+    // Arquivos enviados pelo painel ficam em storage/; os padrões da marca, em public/images/.
+    $img = fn ($p) => $p ? asset((str_starts_with($p, 'images/') ? '' : 'storage/').ltrim($p, '/')) : null;
     $name = $s['company_name'];
     $wa = preg_replace('/\D/', '', (string) $s['whatsapp_number']);
     $waLink = 'https://wa.me/'.$wa.'?text='.rawurlencode((string) $s['whatsapp_message']);
@@ -41,7 +42,8 @@
     <meta name="twitter:card" content="summary_large_image">
 
     @if($s['favicon'])
-        <link rel="icon" href="{{ $img($s['favicon']) }}">
+        <link rel="icon" type="image/png" href="{{ $img($s['favicon']) }}">
+        <link rel="apple-touch-icon" href="{{ $img($s['favicon']) }}">
     @else
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚚</text></svg>">
     @endif
@@ -136,7 +138,7 @@
 <div class="wa" data-number="{{ $wa }}">
     <div class="wa__panel" id="wa-panel" role="dialog" aria-modal="false" aria-labelledby="wa-title" hidden>
         <div class="wa__head">
-            <span class="wa__avatar" aria-hidden="true">@if($s['logo'])<img src="{{ $img($s['logo']) }}" alt="">@else 🚚 @endif</span>
+            <span class="wa__avatar" aria-hidden="true">@if($s['favicon'])<img src="{{ $img($s['favicon']) }}" alt="">@else 🚚 @endif</span>
             <div>
                 <strong id="wa-title">{{ $name }}</strong>
                 <small>Normalmente responde em poucos minutos</small>

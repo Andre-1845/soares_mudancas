@@ -9,8 +9,9 @@ return [
     'defaults' => [
         // Identidade
         'company_name' => 'Soares Mudanças',
-        'logo' => null,
-        'favicon' => null,
+        // Identidade visual padrão (public/images/brand). O gestor pode trocar no painel.
+        'logo' => 'images/brand/soares-logo-horizontal.png',
+        'favicon' => 'images/brand/soares-simbolo-512.png',
         'primary_color' => '#0b2f5b',
         'accent_color' => '#c2410c',
 
@@ -45,7 +46,8 @@ return [
         // SEO
         'seo_title' => 'Soares Mudanças | Mudanças residenciais e comerciais em Resende - RJ',
         'seo_description' => 'Mudanças residenciais, comerciais e interestaduais em Resende e região. Embalagem, guarda-móveis e orçamento grátis pelo WhatsApp.',
-        'og_image' => null,
+        'og_image' => 'images/brand/soares-compartilhamento-1200x630.png',
+        'price_range' => null,
         'google_analytics_id' => null,
     ],
 
